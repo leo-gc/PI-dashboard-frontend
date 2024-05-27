@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
-  height: 100vh;
+  width: 94%;
+  height: 80%;
   background-color: #333333;
-  margin: 10%;
+  z-index: 3;
+  /* Caso queira arredondar os cantos do card */
+  border-radius: 10px;
+  margin-bottom: 80px;
 `

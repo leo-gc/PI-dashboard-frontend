@@ -1,25 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useContext, useState, useEffect } from "react";
-import { Container } from "./styles";
-import { WatertankContext } from "../../contexts/watertank_context";
-import { getLevelFromWatertankResponse } from "../../types/responses";
+import { Container, Icon, InputLabel, Input, PopUpContainer, Button } from "./styles";
 
-export function PopUpLogin() {
-  const [dataOfLevels, setDataOfLevels] = useState<getLevelFromWatertankResponse>()
-
-  const { getLevelFromWatertank } = useContext(WatertankContext)
-
-  async function getLevelFromWatertankFunc() {
-    const response = await getLevelFromWatertank()
-    setDataOfLevels(response)
+export function PopUpLogin({ onLogin }: { onLogin: () => void }) {
+  function handleLogin() {
+    localStorage.setItem('isLogged', 'true');
+    if (onLogin) {
+      onLogin();
+    }
   }
 
-  useEffect(() => {
-    getLevelFromWatertankFunc()
-  }, [])
-
   return <Container>
-    <h1>PopUpLogin</h1>
-    <p>{`dataOfLevels: ${dataOfLevels}`}</p>
+    <PopUpContainer>
+      <Icon />
+      <InputLabel>Login</InputLabel>
+      <Input />
+      <InputLabel>Senha</InputLabel>
+      <Input />
+      <Button onClick={handleLogin}>Entrar</Button>
+    </PopUpContainer>
   </Container>
 }
