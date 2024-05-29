@@ -21,7 +21,7 @@ export default function Home() {
     if (isLogged === 'false' || isLogged === null) {
       setPopUpLogin(true)
     }
-  }, [])
+  }, []) 
 
   return (
     <div
@@ -33,7 +33,8 @@ export default function Home() {
     >
         <Navbar onLogout={handleLogout}/>
         <BlankSpace>
-          <MainContainer></MainContainer>
+          <MainContainer>
+          </MainContainer>
         </BlankSpace>
         {popUpLogin === true && <PopUpLogin onLogin={handleLogin} />}
     </div>

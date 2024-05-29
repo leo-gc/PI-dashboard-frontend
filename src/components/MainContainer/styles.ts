@@ -8,4 +8,5 @@ export const Container = styled.div`
   /* Caso queira arredondar os cantos do card */
   border-radius: 10px;
   margin-bottom: 80px;
+  color: #ffffff
 `
