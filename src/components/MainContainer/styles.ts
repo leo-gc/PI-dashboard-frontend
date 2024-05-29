@@ -16,5 +16,15 @@ export const Container = styled.div`
 `
 export const StyledH1 = styled.h1`
   border-bottom: 2px solid #ffffff;
-  margin-bottom: 40px; 
+  margin-bottom: 30px; 
+`;
+
+export const StyledBut = styled.button`
+  border-bottom: 2px solid #ffffff;
+  margin-left: 10px;
+  background-color: #10BE21;
+  color: #ffffff;
+  width: 150px;
+  height: 30px ;
+  border-radius: 10px;
 `;

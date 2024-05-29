@@ -1,4 +1,4 @@
-import { Container, StyledH1 } from "./styles";
+import { Container, StyledH1, StyledBut } from "./styles";
 
 export function MainContainer() {
   return <Container>
@@ -7,14 +7,13 @@ export function MainContainer() {
     </div>
     <div>
       <form>
-      <form>
-          <input type="text" placeholder="Search..." />
+          <input type="text" placeholder="Pesquisar Reservatório..." />
           <button type="submit">
             <i className="fas fa-search"></i>
           </button>
+          <StyledBut> Adicionar Reservatório</StyledBut>
         </form>
-      </form>
-      <button></button>
+      
     </div>
     <div>
 
