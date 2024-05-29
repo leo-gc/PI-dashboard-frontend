@@ -1,9 +1,9 @@
-import { Container } from "./styles";
+import { Container, StyledH1 } from "./styles";
 
 export function MainContainer() {
   return <Container>
     <div>
-      <h1>Gerenciar Reservatorios</h1>
+      <StyledH1>  Gerenciar Reservatórios  </StyledH1>
     </div>
     <div>
       <form>
