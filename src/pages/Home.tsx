@@ -33,9 +33,9 @@ export default function Home() {
     >
         <Navbar onLogout={handleLogout}/>
         <BlankSpace>
-          <MainContainer></MainContainer>
+          <MainContainer/>
         </BlankSpace>
-        {popUpLogin === true && <PopUpLogin onLogin={handleLogin} />}
+        {popUpLogin && <PopUpLogin onLogin={handleLogin} />}
     </div>
   )
 }

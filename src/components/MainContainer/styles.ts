@@ -8,4 +8,17 @@ export const Container = styled.div`
   /* Caso queira arredondar os cantos do card */
   border-radius: 10px;
   margin-bottom: 80px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 5%;
+  padding-left: 3%;
+  padding-right: 3%;
+`
+
+export const ContainerRow = styled.div`
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 `
