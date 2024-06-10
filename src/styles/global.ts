@@ -10,7 +10,7 @@ export default createGlobalStyle`
       background-color: #f5f5f5;
       font-size: 16px;
       font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
-      color: #333;
+      color: white;
   }
 
 `

@@ -1,22 +1,28 @@
 import Chart from "react-apexcharts";
 
 interface DonutChartProps {
-  value: number
+  percentage: number
   onClick: () => void
   waterTankNumber: string
+  waterTankLevel: number
 }
 
-export function DonutChart({ value, onClick, waterTankNumber }: DonutChartProps) {
-  const seriesChart = [value, 100 - value]
+export function DonutChart({ percentage, onClick, waterTankNumber, waterTankLevel }: DonutChartProps) {
+  const seriesChart = [percentage, 100 - percentage]
 
-  return <div style={{ width: '20%', height: '40%', margin: 0, padding: 0 }}>
+  const colors = () => {
+    if (percentage > 75) return ['#3A73E1', '#555555']
+    if (percentage > 50 && percentage <= 75) return ['#d6d609', '#555555']
+    if (percentage > 25 && percentage <= 50) return ['#f4780b', '#555555']
+    if (percentage <= 25) return ['#f44336', '#555555']
+  }
+
+  return <div onClick={() => onClick()} style={{ width: '24%', height: '36%', margin: 0, padding: 0, cursor: 'pointer', marginTop: '4%' }}>
     <Chart options={{
     chart: {
       type: 'donut',
       events: {
-        dataPointSelection: () => {
-          onClick()
-        }
+        click: () => null,
       }
     },
     plotOptions: {
@@ -24,9 +30,10 @@ export function DonutChart({ value, onClick, waterTankNumber }: DonutChartProps)
         donut: {
           size: '70%'
         },
+        
       }
     },
-    colors: ['#3A73E1', '#555555'],
+    colors: colors(),
     stroke: {
       width: 0
     },
@@ -46,7 +53,7 @@ export function DonutChart({ value, onClick, waterTankNumber }: DonutChartProps)
         {
           x: '50%',
           y: '50%',
-          text: `Nível ${value}%`,
+          text: `Nível ${percentage}%`,
           textAnchor: 'middle',
           foreColor: 'white',
           fontSize: '12px'
@@ -55,7 +62,16 @@ export function DonutChart({ value, onClick, waterTankNumber }: DonutChartProps)
     },
     dataLabels: {
       enabled: false
+    },
+    tooltip: {
+      y: {
+        formatter: () => `${waterTankLevel}`,
+        title: {
+          formatter: () => 'Nível do tanque: '
+        }
+      }
     }
+
   }} series={seriesChart} type="donut" width="100%" height="100%" />
     </div>
 }
