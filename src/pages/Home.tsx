@@ -1,27 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { BlankSpace } from "../components/BlankSpace";
 import { MainContainer } from "../components/MainContainer";
 import { Navbar } from "../components/Navbar";
 import { PopUpLogin } from "../components/PopUpLogin";
+import { AuthContext } from "../contexts/auth_context";
+import { MainCharts } from "../components/MainCharts";
 
 export default function Home() {
-  const [popUpLogin, setPopUpLogin] = useState(false)
-
-  const handleLogin = () => {
-    setPopUpLogin(false);
-  };
-
-  const handleLogout = () => {
-    setPopUpLogin(true);
-  };
+  const { login, logout, setPopUpLogged, popUpLogged } = useContext(AuthContext)
 
   useEffect(() => {
     const isLogged = localStorage.getItem('isLogged')
     console.log(isLogged)
     if (isLogged === 'false' || isLogged === null) {
-      setPopUpLogin(true)
+      setPopUpLogged(true)
     }
-  }, [])
+  }, [setPopUpLogged])
 
   return (
     <div
@@ -31,11 +25,13 @@ export default function Home() {
         alignItems: 'center',
        }}
     >
-        <Navbar onLogout={handleLogout}/>
+        <Navbar onLogout={logout}/>
         <BlankSpace>
-          <MainContainer></MainContainer>
+          <MainContainer>
+            <MainCharts />
+          </MainContainer>
         </BlankSpace>
-        {popUpLogin === true && <PopUpLogin onLogin={handleLogin} />}
+        {popUpLogged && <PopUpLogin onLogin={login} />}
     </div>
   )
 }

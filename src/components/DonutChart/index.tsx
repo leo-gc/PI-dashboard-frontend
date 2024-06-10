@@ -1,0 +1,77 @@
+import Chart from "react-apexcharts";
+
+interface DonutChartProps {
+  percentage: number
+  onClick: () => void
+  waterTankNumber: string
+  waterTankLevel: number
+}
+
+export function DonutChart({ percentage, onClick, waterTankNumber, waterTankLevel }: DonutChartProps) {
+  const seriesChart = [percentage, 100 - percentage]
+
+  const colors = () => {
+    if (percentage > 75) return ['#3A73E1', '#555555']
+    if (percentage > 50 && percentage <= 75) return ['#d6d609', '#555555']
+    if (percentage > 25 && percentage <= 50) return ['#f4780b', '#555555']
+    if (percentage <= 25) return ['#f44336', '#555555']
+  }
+
+  return <div onClick={() => onClick()} style={{ width: '24%', height: '36%', margin: 0, padding: 0, cursor: 'pointer', marginTop: '4%' }}>
+    <Chart options={{
+    chart: {
+      type: 'donut',
+      events: {
+        click: () => null,
+      }
+    },
+    plotOptions: {
+      pie: {
+        donut: {
+          size: '70%'
+        },
+        
+      }
+    },
+    colors: colors(),
+    stroke: {
+      width: 0
+    },
+    legend: {
+      show: false
+    },
+    annotations: {
+      texts: [ 
+        {
+          x: '50%',
+          y: '40%',
+          text: `Reservatório ${waterTankNumber}`,
+          textAnchor: 'middle',
+          foreColor: 'white',
+          fontSize: '12px'
+        },
+        {
+          x: '50%',
+          y: '50%',
+          text: `Nível ${percentage}%`,
+          textAnchor: 'middle',
+          foreColor: 'white',
+          fontSize: '12px'
+        }
+      ]
+    },
+    dataLabels: {
+      enabled: false
+    },
+    tooltip: {
+      y: {
+        formatter: () => `${waterTankLevel}`,
+        title: {
+          formatter: () => 'Nível do tanque: '
+        }
+      }
+    }
+
+  }} series={seriesChart} type="donut" width="100%" height="100%" />
+    </div>
+}
