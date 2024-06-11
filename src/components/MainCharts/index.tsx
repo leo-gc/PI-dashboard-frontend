@@ -1,14 +1,50 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigate } from "react-router-dom";
 import { DonutChart } from "../DonutChart";
 import { RowCharts, Title } from "./styles";
+import { useContext, useEffect, useState } from "react";
+import { WatertankContext } from "../../contexts/watertank_context";
+import { getLastLevelFromWatertankResponse } from "../../types/responses";
+import axios from "axios";
 
 export function MainCharts() {
   const navigate = useNavigate();
+  const { getAllLastLevels } = useContext(WatertankContext)
+  const [lastLevels, setLastLevels] = useState<getLastLevelFromWatertankResponse[]>([])
+
+  const fetchLastLevels = async () => {
+    try {
+      // const levels = await getAllLastLevels()
+      // const resp = await axios.get<getLastLevelFromWatertankResponse[]>('https://timeseries-api-52f30e35350f.herokuapp.com/api/timeseries/v0.2/smartcampusmaua/LastWaterTankLevel')
+      const resp = await fetch('https://timeseries-api-52f30e35350f.herokuapp.com/api/timeseries/v0.2/smartcampusmaua/LastWaterTankLevel', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      console.log(resp)
+      // const levels = resp.data
+      // if (levels) setLastLevels(levels)
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
-      <Title>Nível dos Reservatórios</Title>
+      <Title style={{ cursor: 'pointer' }} onClick={fetchLastLevels}>Nível dos Reservatórios</Title>
       <RowCharts>
-        <DonutChart 
+        { lastLevels.map((l) => {
+          return <DonutChart
+            key={l.i}
+            percentage={l.data_percentage}
+            onClick={() => navigate(`/tank/${l.i}`)}
+            waterTankNumber={l.i.toString()}
+            waterTankLevel={l.data_distance}
+            />
+        }) }
+        {/* <DonutChart 
           percentage={84} 
           onClick={() => navigate('/tank/1')} 
           waterTankNumber={'1'}
@@ -55,7 +91,7 @@ export function MainCharts() {
           onClick={() => navigate('/tank/8')} 
           waterTankNumber={'8'} 
           waterTankLevel={1900} 
-        />
+        /> */}
       </RowCharts>
     </>
   )
