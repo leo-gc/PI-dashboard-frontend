@@ -1,9 +1,9 @@
 import { PropsWithChildren } from "react";
 import { Container } from "./styles";
 
-export function MainContainer({ children }: PropsWithChildren) {
+export function MainContainer({ children, style = undefined }: PropsWithChildren & { style?: React.CSSProperties }) {
   return <>
-    <Container>
+    <Container style={style}>
       { children }
     </Container>
   </>

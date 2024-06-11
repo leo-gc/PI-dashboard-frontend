@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Tank from './pages/Tank'
+import Manage from './pages/Manage'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/tank/6" element={<Tank tankNumber={6} />} />
         <Route path="/tank/7" element={<Tank tankNumber={7} />} />
         <Route path="/tank/8" element={<Tank tankNumber={8} />} />
+        <Route path="/manage" element={<Manage />} />
       </Routes>
     </Router>
   )
