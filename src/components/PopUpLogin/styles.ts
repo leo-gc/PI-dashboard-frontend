@@ -14,6 +14,15 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`
+
+export const BlurBackground = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 5;
+  position: absolute;
+  top: 0px;
   backdrop-filter: blur(5px);
 `
 

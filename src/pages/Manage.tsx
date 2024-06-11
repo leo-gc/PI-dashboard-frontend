@@ -4,6 +4,7 @@ import { MainContainer } from "../components/MainContainer"
 import { BlankSpace } from "../components/BlankSpace"
 import { Navbar } from "../components/Navbar"
 import { useNavigate } from "react-router-dom"
+import { ManageTanks } from "../components/ManageTanks"
 
 export default function Manage() {
   const { logout, setPopUpLogged } = useContext(AuthContext)
@@ -28,7 +29,9 @@ export default function Manage() {
     >
         <Navbar onLogout={logout}/>
         <BlankSpace>
-          <MainContainer></MainContainer>
+          <MainContainer style={{ justifyContent: "normal" }}>
+            <ManageTanks />
+          </MainContainer>
         </BlankSpace>
     </div>
   )

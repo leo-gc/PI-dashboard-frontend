@@ -5,9 +5,10 @@ interface DonutChartProps {
   onClick: () => void
   waterTankNumber: string
   waterTankLevel: number
+  isSolo?: boolean
 }
 
-export function DonutChart({ percentage, onClick, waterTankNumber, waterTankLevel }: DonutChartProps) {
+export function DonutChart({ percentage, onClick, waterTankNumber, waterTankLevel, isSolo = false }: DonutChartProps) {
   const seriesChart = [percentage, 100 - percentage]
 
   const colors = () => {
@@ -17,7 +18,7 @@ export function DonutChart({ percentage, onClick, waterTankNumber, waterTankLeve
     if (percentage <= 25) return ['#f44336', '#555555']
   }
 
-  return <div onClick={() => onClick()} style={{ width: '24%', height: '36%', margin: 0, padding: 0, cursor: 'pointer', marginTop: '4%' }}>
+  return <div onClick={() => onClick()} style={{ width: '24%', height: '36%', margin: 0, padding: 0, cursor: 'pointer', marginTop: isSolo ? '0px' : '4%', marginBottom: isSolo ? '3%' : '0px' }}>
     <Chart options={{
     chart: {
       type: 'donut',
@@ -30,7 +31,6 @@ export function DonutChart({ percentage, onClick, waterTankNumber, waterTankLeve
         donut: {
           size: '70%'
         },
-        
       }
     },
     colors: colors(),
