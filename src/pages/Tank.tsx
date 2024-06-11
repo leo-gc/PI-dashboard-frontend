@@ -4,8 +4,9 @@ import { MainContainer } from "../components/MainContainer"
 import { BlankSpace } from "../components/BlankSpace"
 import { Navbar } from "../components/Navbar"
 import { useNavigate } from "react-router-dom"
+import { TankGraphs } from "../components/TankGraphs"
 
-export default function Tank({ tankNumber: number }) {
+export default function Tank({ tankNumber }: { tankNumber: number }) {
   const { logout, setPopUpLogged } = useContext(AuthContext)
   const navigate = useNavigate()
 
@@ -28,7 +29,10 @@ export default function Tank({ tankNumber: number }) {
     >
         <Navbar onLogout={logout}/>
         <BlankSpace>
-          <MainContainer></MainContainer>
+          <MainContainer>
+            <h1>{`Reservatório ${tankNumber}`}</h1>
+            <TankGraphs tankNumber={tankNumber} />
+          </MainContainer>
         </BlankSpace>
     </div>
   )
