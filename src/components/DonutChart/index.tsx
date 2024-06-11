@@ -45,7 +45,7 @@ export function DonutChart({ percentage, onClick, waterTankNumber, waterTankLeve
         {
           x: '50%',
           y: '40%',
-          text: `Reservatório ${waterTankNumber}`,
+          text: !isSolo ? `Reservatório ${waterTankNumber}` : `Nível do tanque`,
           textAnchor: 'middle',
           foreColor: 'white',
           fontSize: '12px'

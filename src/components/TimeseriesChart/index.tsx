@@ -76,7 +76,7 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({ data, interval
   };
 
   return (
-    <div style={{ width: '24%', height: '50%', padding: '0', margin: '0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div style={{ width: '30%', height: '50%', padding: '0', margin: '0', display: 'flex', justifyContent: 'center', alignItems: 'center', paddingRight: '32px' }}>
       <Chart options={options} series={[{ name: 'Reservatório', data: [10, 41, 35, 51, 49, 62, 69, 25, 80, 15, 66, 55, 21, 44, 45] }]} type="line" width="100%" height="100%" />
     </div>
   );

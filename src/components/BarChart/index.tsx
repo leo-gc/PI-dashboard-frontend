@@ -11,7 +11,7 @@ export function BarChart({ data = undefined }: { data?: any[] }) {
     ]
   }]
 
-  return <div style={{ width: '24%', height: '36%', margin: 0, padding: 0, cursor: 'pointer', marginBottom: '3%' }}>
+  return <div style={{ width: '30%', height: '40%', margin: 0, padding: 0, cursor: 'pointer', marginBottom: '3%', marginRight: '40px' }}>
     <Chart options={{
     chart: {
       type: 'bar',
@@ -43,8 +43,27 @@ export function BarChart({ data = undefined }: { data?: any[] }) {
     dataLabels: {
       enabled: false
     },
+    yaxis: {
+      title: {
+        text: 'Vazão',
+        style: {
+          color: 'white',
+        },
+      },
+      labels: {
+        style: {
+          colors: 'white',
+        }
+      }
+    },
     xaxis: {
       type: 'datetime',
+      title: {
+        text: 'Tempo',
+        style: {
+          color: 'white',
+        },
+      },
       categories: [
         '2011-01-01', '2011-02-01', '2011-03-01', '2011-04-01', '2011-05-01', '2011-06-01',
         '2011-07-01', '2011-08-01', '2011-09-01', '2011-10-01', '2011-11-01', '2011-12-01',
