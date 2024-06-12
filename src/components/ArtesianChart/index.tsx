@@ -20,7 +20,7 @@ export function ArtesianChart() {
 
       const entradaData = resp.map((item: { timestamp: any; fields: { data_pressure_0: any; }; }) => ({ x: new Date(item.timestamp / 1000000), y: item.fields.data_pressure_0 }));
       const saidaData = resp.map((item: { timestamp: any; fields: { data_pressure_1: any; }; }) => ({ x: new Date(item.timestamp / 1000000), y: item.fields.data_pressure_1 }));
-      const entradaSaidaData = resp.map((item: { timestamp: any; fields: { data_pressure_0: any; data_pressure_1: any; }; }) => ({ x: new Date(item.timestamp / 1000000), y: item.fields.data_pressure_0 - item.fields.data_pressure_1 }));
+      const entradaSaidaData = resp.map((item: { timestamp: any; fields: { data_pressure_0: any; data_pressure_1: any; }; }) => ({ x: new Date(item.timestamp / 1000000), y: item.fields.data_pressure_1 - item.fields.data_pressure_0 }));
       setEntradaData(entradaData);
       setSaidaData(saidaData);
       setEntradaSaidaData(entradaSaidaData);
