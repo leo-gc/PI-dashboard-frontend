@@ -9,14 +9,18 @@ export function Navbar({ onLogout }: { onLogout: () => void }){
   const url = window.location.pathname
 
   return <Container>
-    <IMTLogo src="/images/imt_logo.png" alt="IMT" />
+    <IMTLogo onClick={() => navigate('/')} style={{cursor: 'pointer'}} src="/images/imt_logo.png" alt="IMT" />
     <NavbarItem style={
       url === '/' ? { color: shade(0.3, '#fff') } : undefined
     } onClick={() => navigate('/')}>Início</NavbarItem>
-    <NavbarItem style={{ marginLeft: '6%', color: url === '/manage' ? 
+    <NavbarItem style={{ marginLeft: '2%', color: url === '/manage' ? 
       shade(0.3, '#fff') : '' }} 
       onClick={() => navigate('/manage')}  
     >Gerenciar</NavbarItem>
+    <NavbarItem style={{ marginLeft: '2%', color: url === '/artesian' ? 
+      shade(0.3, '#fff') : '' }} 
+      onClick={() => navigate('/artesian')}  
+    >Poço Artesiano</NavbarItem>
     <NavbarItem style={{ marginLeft: '60%' }} onClick={onLogout}>Sair</NavbarItem>
   </Container>
 }

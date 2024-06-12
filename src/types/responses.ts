@@ -37,3 +37,11 @@ export type getLevelFromWatertankResponse = {
   };
   timestamp: number;
 }
+
+export type getLastLevelFromWatertankResponse = {
+  data_distance: number,
+  data_percentage: number,
+  i: number,
+  name: string,
+  nodeName: string,
+}

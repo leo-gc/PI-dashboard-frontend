@@ -12,3 +12,23 @@ export const RowCharts = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 `
+
+export const AnimatedTitle = styled.h1`
+  font-size: 24px;
+  color: white;
+  animation: blinker 1s linear infinite;
+  margin-top: 20px;
+
+  @keyframes blinker {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+`

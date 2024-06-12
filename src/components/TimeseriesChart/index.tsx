@@ -3,42 +3,48 @@ import React from 'react';
 import Chart from 'react-apexcharts';
 
 interface TimeseriesChartProps {
-  data: { x: string, y: number }[]; // Array de pontos de dados { x: string, y: number }
-  interval: string; // Intervalo de tempo selecionado
-  onClick: () => void; // Função a ser chamada ao clicar no gráfico
+  data: any[];
 }
 
-export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({ data, interval, onClick }) => {
-  const now = (val: number) => `${new Date().getHours()}:${new Date().getMinutes() - val}`;
+export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({ data }) => {
+  const chartData = data.map((item: { timestamp: number; fields: { data_distance: number; } }) => ({
+    x: new Date(item.timestamp / 1000000),
+    y: item.fields.data_distance,
+  }));
+
   const options = {
+    title: {
+      text: 'Nível de Água do Reservatório',
+      align: 'center',
+      style: {
+        color: 'white',
+      },
+    },
     chart: {
-      type: 'line',
+      type: 'line' as const,
       zoom: {
         enabled: false,
+      },
+      toolbar: {
+        show: true,
+        tools: {
+          download: true, // Habilita a opção de download
+          selection: true,
+          zoom: true,
+          zoomin: true,
+          zoomout: true,
+          pan: true,
+          reset: true
+        },
+        autoSelected: 'zoom' 
       },
     },
     dataLabels: {
       enabled: false,
     },
+    
     xaxis: {
-      categories: [
-        now(0), 
-        now(1), 
-        now(2), 
-        now(3), 
-        now(4), 
-        now(5), 
-        now(6), 
-        now(7),
-        now(8),
-        now(9),
-        now(10),
-        now(11),
-        now(12),
-        now(13),
-        now(14),
-        now(15),
-      ],
+      type: 'datetime',
       title: {
         text: 'Tempo',
         style: {
@@ -48,14 +54,12 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({ data, interval
       labels: {
         style: {
           colors: 'white',
-        
         }
       }
-      
     },
     yaxis: {
       title: {
-        text: 'Nível %',
+        text: 'Distância',
         style: {
           color: 'white',
         },
@@ -66,19 +70,24 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({ data, interval
         }
       }
     },
-
     tooltip: {
-      enabled: false,
+      enabled: true,
     },
     stroke: {
       curve: 'straight',
     },
+    theme: {
+      mode: 'dark',
+    }
   };
 
+  if (chartData.length === 0) {
+    return <p>Não há dados disponíveis.</p>;
+  }
+
   return (
-    <div style={{ width: '24%', height: '50%', padding: '0', margin: '0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <Chart options={options} series={[{ name: 'Reservatório', data: [10, 41, 35, 51, 49, 62, 69, 25, 80, 15, 66, 55, 21, 44, 45] }]} type="line" width="100%" height="100%" />
+    <div style={{ width: '40%', height: '50%', padding: '0', margin: '0', paddingRight: '32px' }}>
+      <Chart options={options} series={[{ name: 'Reservatório', data: chartData }]} type="line" width="100%" height="100%" />
     </div>
   );
 };
-

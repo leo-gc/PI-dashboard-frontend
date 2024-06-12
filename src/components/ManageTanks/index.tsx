@@ -35,7 +35,7 @@ export function ManageTanks() {
         </TR>
         <TR>
           <TDSTART style={{ fontWeight: 'BOLD' }}>2</TDSTART>
-          <TD>Reservatório Bloco U</TD>
+          <TD>Reservatório Bloco E</TD>
           <TD>
             <StatusWrapper>
               <YellowStatus/>
