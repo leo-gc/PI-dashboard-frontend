@@ -17,6 +17,7 @@ export const AnimatedTitle = styled.h1`
   font-size: 24px;
   color: white;
   animation: blinker 1s linear infinite;
+  margin-left: 24px;
   margin-top: 20px;
 
   @keyframes blinker {

@@ -33,7 +33,7 @@ export function TankGraphs({ tankNumber }: TankGraphsProps) {
   return <Container>
     {/* <h1 style={{ cursor: 'pointer' }} onClick={fetchTankbyNodeName} >cuzinho</h1> */}
     
-    { tankNodeName === undefined && <>
+    { tankNodeName === undefined && <div style={{ marginRight: '10%' }}>
         <CirclesWithBar 
           color="#146cba"
           height={200}
@@ -42,7 +42,7 @@ export function TankGraphs({ tankNumber }: TankGraphsProps) {
           wrapperStyle={{ marginTop: '10%'}}
         />
         <AnimatedTitle>Loading data...</AnimatedTitle>
-        </> }
+        </div> }
     
     { tankNodeName && <TimeseriesChart data={tankNodeName} /> }
     <BarChart />

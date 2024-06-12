@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // TimeseriesChart.tsx
+import { ApexOptions } from 'apexcharts';
 import React from 'react';
 import Chart from 'react-apexcharts';
 
@@ -12,7 +14,7 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({ data }) => {
     y: item.fields.data_distance,
   }));
 
-  const options = {
+  const options: ApexOptions = {
     title: {
       text: 'Nível de Água do Reservatório',
       align: 'center',

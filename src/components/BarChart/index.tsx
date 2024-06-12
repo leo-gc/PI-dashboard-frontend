@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Chart from 'react-apexcharts'
 
-export function BarChart({ data = undefined }: { data?: any[] }) {
+export function BarChart() {
   const seriesChart = [{
     name: 'Vazão',
     data: [

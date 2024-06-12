@@ -1,3 +1,4 @@
+import { ApexOptions } from "apexcharts";
 import Chart from "react-apexcharts";
 
 interface DonutChartProps {
@@ -18,8 +19,7 @@ export function DonutChart({ percentage, onClick, waterTankNumber, waterTankLeve
     if (percentage <= 25) return ['#f44336', '#555555']
   }
 
-  return <div onClick={() => onClick()} style={{ width: '24%', height: '36%', margin: 0, padding: 0, cursor: 'pointer', marginTop: isSolo ? '0px' : '4%', marginBottom: isSolo ? '3%' : '0px' }}>
-    <Chart options={{
+  const options: ApexOptions = {
     chart: {
       type: 'donut',
       events: {
@@ -43,16 +43,16 @@ export function DonutChart({ percentage, onClick, waterTankNumber, waterTankLeve
     annotations: {
       texts: [ 
         {
-          x: '50%',
-          y: '40%',
+          x: 140,
+          y: 80,
           text: !isSolo ? `Reservatório ${waterTankNumber}` : `Nível do tanque`,
           textAnchor: 'middle',
           foreColor: 'white',
           fontSize: '12px'
         },
         {
-          x: '50%',
-          y: '50%',
+          x: 140,
+          y: 104,
           text: `Nível ${percentage}%`,
           textAnchor: 'middle',
           foreColor: 'white',
@@ -72,6 +72,9 @@ export function DonutChart({ percentage, onClick, waterTankNumber, waterTankLeve
       }
     }
 
-  }} series={seriesChart} type="donut" width="100%" height="100%" />
+  }
+
+  return <div onClick={() => onClick()} style={{ width: '24%', height: '36%', margin: 0, padding: 0, cursor: 'pointer', marginTop: isSolo ? '0px' : '4%', marginBottom: isSolo ? '3%' : '0px' }}>
+    <Chart options={options} series={seriesChart} type="donut" width="100%" height="100%" />
     </div>
 }

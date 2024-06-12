@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext, useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 import { Container } from './styles';
 import { WatertankContext } from '../../contexts/watertank_context';
+import { ApexOptions } from 'apexcharts';
 
 export function ArtesianChart() {
   const { getArtesianWell } = useContext(WatertankContext)
@@ -33,7 +35,7 @@ export function ArtesianChart() {
     fetchArtesianWell();
   }, []);
 
-  const options = {
+  const options: ApexOptions = {
     title: {
       align: 'center',
       style: {
@@ -56,7 +58,7 @@ export function ArtesianChart() {
           pan: true,
           reset: true
         },
-        autoSelected: 'zoom' 
+        autoSelected: 'zoom'
       },
     },
     dataLabels: {
@@ -105,7 +107,7 @@ export function ArtesianChart() {
     return <Container>Loading...</Container>;
   }
 
-  const optionsEntrada = { ...options, title: { ...options.title, text: 'Pressão de Entrada do Poço Artesiano' } };
+  const optionsEntrada: ApexOptions = { ...options, title: {}, };
   const optionsSaida = { ...options, title: { ...options.title, text: 'Pressão de Saída do Poço Artesiano' } };
   const optionsEntradaSaida = { ...options, title: { ...options.title, text: 'Diferença de Pressão do Poço Artesiano' } };
 
