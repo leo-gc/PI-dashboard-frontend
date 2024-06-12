@@ -13,14 +13,14 @@ export function Navbar({ onLogout }: { onLogout: () => void }){
     <NavbarItem style={
       url === '/' ? { color: shade(0.3, '#fff') } : undefined
     } onClick={() => navigate('/')}>Início</NavbarItem>
-    <NavbarItem style={{ marginLeft: '6%', color: url === '/manage' ? 
+    <NavbarItem style={{ marginLeft: '2%', color: url === '/manage' ? 
       shade(0.3, '#fff') : '' }} 
       onClick={() => navigate('/manage')}  
     >Gerenciar</NavbarItem>
-    <NavbarItem style={{ marginLeft: '6%', color: url === '/artesian' ? 
+    <NavbarItem style={{ marginLeft: '2%', color: url === '/artesian' ? 
       shade(0.3, '#fff') : '' }} 
       onClick={() => navigate('/artesian')}  
-    >Poço</NavbarItem>
-    <NavbarItem style={{ marginLeft: '50%' }} onClick={onLogout}>Sair</NavbarItem>
+    >Poço Artesiano</NavbarItem>
+    <NavbarItem style={{ marginLeft: '60%' }} onClick={onLogout}>Sair</NavbarItem>
   </Container>
 }

@@ -11,7 +11,7 @@ export function BarChart({ data = undefined }: { data?: any[] }) {
     ]
   }]
 
-  return <div style={{ width: '30%', height: '40%', margin: 0, padding: 0, cursor: 'pointer', marginBottom: '3%', marginRight: '40px' }}>
+  return <div style={{ width: '40%', height: '50%', margin: 0, padding: 0, cursor: 'pointer', marginRight: '40px' }}>
     <Chart options={{
     chart: {
       type: 'bar',

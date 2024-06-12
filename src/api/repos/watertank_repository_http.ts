@@ -14,8 +14,6 @@ export class WatertankRepositoryHttp implements IWatertankRepository {
   async getLevelFromWaterTankByNodeName(nodeName: string) {
     try {// /WaterTankLevel/deviceName/WaterTankLavel_7
       const response = await this.http.get<any>(`/WaterTankLevel/deviceName/${nodeName}`)
-      console.log(1)
-      console.log(response.data)
       return response.data
     } catch (error) {
       console.log(error)

@@ -13,6 +13,13 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({ data }) => {
   }));
 
   const options = {
+    title: {
+      text: 'Nível de Água do Reservatório',
+      align: 'center',
+      style: {
+        color: 'white',
+      },
+    },
     chart: {
       type: 'line' as const,
       zoom: {
@@ -52,7 +59,7 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({ data }) => {
     },
     yaxis: {
       title: {
-        text: 'Nível %',
+        text: 'Distância',
         style: {
           color: 'white',
         },
