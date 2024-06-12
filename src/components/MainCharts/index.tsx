@@ -1,41 +1,45 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigate } from "react-router-dom";
 import { DonutChart } from "../DonutChart";
-import { RowCharts, Title } from "./styles";
-import { useContext, useEffect, useState } from "react";
+import { AnimatedTitle, RowCharts, Title } from "./styles";
+import { useContext, useEffect } from "react";
 import { WatertankContext } from "../../contexts/watertank_context";
-import { getLastLevelFromWatertankResponse } from "../../types/responses";
-import axios from "axios";
+import { CirclesWithBar } from "react-loader-spinner";
 
 export function MainCharts() {
   const navigate = useNavigate();
-  const { getAllLastLevels } = useContext(WatertankContext)
-  const [lastLevels, setLastLevels] = useState<getLastLevelFromWatertankResponse[]>([])
+  const { getAllLastLevels, lastLevels } = useContext(WatertankContext)
 
   const fetchLastLevels = async () => {
     try {
-      // const levels = await getAllLastLevels()
-      // const resp = await axios.get<getLastLevelFromWatertankResponse[]>('https://timeseries-api-52f30e35350f.herokuapp.com/api/timeseries/v0.2/smartcampusmaua/LastWaterTankLevel')
-      const resp = await fetch('https://timeseries-api-52f30e35350f.herokuapp.com/api/timeseries/v0.2/smartcampusmaua/LastWaterTankLevel', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      console.log(resp)
-      // const levels = resp.data
-      // if (levels) setLastLevels(levels)
-
+      await getAllLastLevels()
     } catch (error) {
       console.log(error)
     }
   }
 
+  useEffect(() => {
+    fetchLastLevels()
+  }, [])
+
   return (
     <>
       <Title style={{ cursor: 'pointer' }} onClick={fetchLastLevels}>Nível dos Reservatórios</Title>
+      
+      { lastLevels === undefined && 
+        <>
+        <CirclesWithBar 
+          color="#146cba"
+          height={200}
+          width={200}
+          visible={true}
+          wrapperStyle={{ marginTop: '10%'}}
+        />
+        <AnimatedTitle>Loading data...</AnimatedTitle>
+        </>
+      }
       <RowCharts>
-        { lastLevels.map((l) => {
+        { lastLevels?.map((l) => {
           return <DonutChart
             key={l.i}
             percentage={l.data_percentage}

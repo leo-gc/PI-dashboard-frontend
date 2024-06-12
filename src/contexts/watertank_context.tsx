@@ -8,11 +8,13 @@ import { GetLastLevelFromWatertankUsecase } from "../api/usecases/get_last_level
 type WatertankContextType = {
   getLevelFromWatertank: () => Promise<getLevelFromWatertankResponse | undefined>
   getAllLastLevels: () => Promise<getLastLevelFromWatertankResponse[] | undefined>
+  lastLevels: getLastLevelFromWatertankResponse[] | undefined
 }
 
 const defaultContext: WatertankContextType = {
- getLevelFromWatertank: async () => undefined,
- getAllLastLevels: async () => undefined
+  getLevelFromWatertank: async () => undefined,
+  getAllLastLevels: async () => undefined,
+  lastLevels: undefined
 }
 
 export const WatertankContext = React.createContext(defaultContext)
@@ -23,6 +25,8 @@ const getLevelFromWatertankUsecase = new GetLevelFromWaterTankUsecase(repo)
 const getAllLastLevelsFromWatertanksUsecase = new GetLastLevelFromWatertankUsecase(repo)
 
 export function WatertankContextProvider({ children }: PropsWithChildren) {
+  const [lastLevels, setLastLevels] = React.useState<getLastLevelFromWatertankResponse[] | undefined>(undefined)
+
   const getLevelFromWatertank = async () => {
     const response = await getLevelFromWatertankUsecase.execute()
     return response
@@ -30,11 +34,12 @@ export function WatertankContextProvider({ children }: PropsWithChildren) {
 
   const getAllLastLevels = async () => {
     const response = await getAllLastLevelsFromWatertanksUsecase.execute()
+    if (response) setLastLevels(response)
     return response
   }
 
   return (
-    <WatertankContext.Provider value={{ getLevelFromWatertank, getAllLastLevels }}>
+    <WatertankContext.Provider value={{ getLevelFromWatertank, getAllLastLevels, lastLevels }}>
       {children}
     </WatertankContext.Provider>
   )
