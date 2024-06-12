@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AxiosInstance } from "axios";
 import { IWatertankRepository } from "./watertank_repository_interface";
 import { getLastLevelFromWatertankResponse, getLevelFromWatertankResponse } from "../../types/responses";
@@ -11,8 +12,8 @@ export class WatertankRepositoryHttp implements IWatertankRepository {
   }
 
   async getLevelFromWaterTankByNodeName(nodeName: string) {
-    try {
-      const response = await this.http.get<any>(`/WaterTankLevel/${nodeName}`)
+    try {// /WaterTankLevel/deviceName/WaterTankLavel_7
+      const response = await this.http.get<any>(`/WaterTankLevel/deviceName/${nodeName}`)
       console.log(1)
       console.log(response.data)
       return response.data

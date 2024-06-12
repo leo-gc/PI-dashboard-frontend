@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useContext, useEffect } from "react";
 import { BarChart } from "../BarChart";
 import { DonutChart } from "../DonutChart";
@@ -32,11 +33,11 @@ export function TankGraphs({ tankNumber }: TankGraphsProps) {
   }
 
   useEffect(() => {
-    fetchTankbyNodeName()
   }, [])
 
   return <Container>
-    <TimeseriesChart data={tankNodeName} />
+    <h1 style={{ cursor: 'pointer' }} onClick={fetchTankbyNodeName} >cuzinho</h1>
+    {/* <TimeseriesChart data={tankNodeName} /> */}
     <BarChart />
     <DonutChart 
       percentage={lastLevel ? lastLevel.data_percentage : 0} 
