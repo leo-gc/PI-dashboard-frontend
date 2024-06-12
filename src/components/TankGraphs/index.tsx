@@ -17,13 +17,6 @@ export function TankGraphs({ tankNumber }: TankGraphsProps) {
   const [tankNodeName, setTankNodeName] = React.useState<any>()
   const lastLevel = lastLevels?.filter(level => level.i === tankNumber)[0]
 
-  const now = new Date();
-  const startTime = new Date(now.getTime() - 15 * 60 * 1000);
-  const newData = Array.from({ length: 100 }, (_, i) => ({
-    x: new Date(startTime.getTime() + i * 1000).toISOString(),
-    y: Math.random() * 100
-  }));
-
   const fetchTankbyNodeName = async () => {
     try {
       const resp = await getLevelFromWatertankByNodeName(tankNumber.toString())

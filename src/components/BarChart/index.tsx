@@ -78,6 +78,9 @@ export function BarChart({ data = undefined }: { data?: any[] }) {
         }
       }
     },
+    theme: {
+      mode: 'dark',
+    }
   }} 
   series={seriesChart} type="bar" width="100%" height="100%" />
   </div>
