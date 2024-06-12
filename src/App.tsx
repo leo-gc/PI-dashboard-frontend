@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Tank from './pages/Tank'
 import Manage from './pages/Manage'
+import Artesian from './pages/Artesian'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/tank/7" element={<Tank tankNumber={7} />} />
         <Route path="/tank/8" element={<Tank tankNumber={8} />} />
         <Route path="/manage" element={<Manage />} />
+        <Route path="/artesian" element={<Artesian />} />
       </Routes>
     </Router>
   )
