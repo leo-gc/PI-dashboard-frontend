@@ -59,7 +59,7 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({ data }) => {
   };
 
   return (
-    <div style={{ width: '30%', height: '50%', padding: '0', margin: '0', display: 'flex', justifyContent: 'center', alignItems: 'center', paddingRight: '32px' }}>
+    <div style={{ width: '40%', height: '50%', padding: '0', margin: '0', display: 'flex', justifyContent: 'center', alignItems: 'center', paddingRight: '32px' }}>
       <Chart options={options} series={[{ name: 'Reservatório', data: chartData }]} type="line" width="100%" height="100%" />
     </div>
   );

@@ -5,6 +5,8 @@ import { DonutChart } from "../DonutChart";
 import { TimeseriesChart } from "../TimeseriesChart"
 import { Container } from "./styles";
 import { WatertankContext } from "../../contexts/watertank_context";
+import { CirclesWithBar } from "react-loader-spinner";
+import { AnimatedTitle } from "../MainCharts/styles";
 
 type TankGraphsProps = {
   tankNumber: number;
@@ -24,7 +26,6 @@ export function TankGraphs({ tankNumber }: TankGraphsProps) {
 
   const fetchTankbyNodeName = async () => {
     try {
-      console.log('fetch')
       const resp = await getLevelFromWatertankByNodeName(tankNumber.toString())
       setTankNodeName(resp)
     } catch (error) {
@@ -38,7 +39,19 @@ export function TankGraphs({ tankNumber }: TankGraphsProps) {
 
   return <Container>
     {/* <h1 style={{ cursor: 'pointer' }} onClick={fetchTankbyNodeName} >cuzinho</h1> */}
-    <TimeseriesChart data={tankNodeName} />
+    
+    { tankNodeName === undefined && <>
+        <CirclesWithBar 
+          color="#146cba"
+          height={200}
+          width={200}
+          visible={true}
+          wrapperStyle={{ marginTop: '10%'}}
+        />
+        <AnimatedTitle>Loading data...</AnimatedTitle>
+        </> }
+    
+    { tankNodeName && <TimeseriesChart data={tankNodeName} /> }
     <BarChart />
     <DonutChart 
       percentage={lastLevel ? lastLevel.data_percentage : 0} 
