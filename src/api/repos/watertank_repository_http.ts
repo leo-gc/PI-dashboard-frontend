@@ -10,11 +10,21 @@ export class WatertankRepositoryHttp implements IWatertankRepository {
     return response.data
   }
 
+  async getLevelFromWaterTankByNodeName(nodeName: string) {
+    try {
+      const response = await this.http.get<any>(`/WaterTankLevel/${nodeName}`)
+      console.log(1)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.log(error)
+      throw new Error('Error fetching data: /WaterTankLevel/' + nodeName + ' - error: ' + error)
+    }
+  }
+
   async getAllLastLevels(): Promise<getLastLevelFromWatertankResponse[]> {
     try {
       const response = await this.http.get<getLastLevelFromWatertankResponse[]>('/LastWaterTankLevel')
-      console.log(response)
-      console.log(response.data)
       return response.data
     } catch (error) {
       console.log(error)

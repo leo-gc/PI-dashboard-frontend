@@ -3,16 +3,19 @@ import React from 'react';
 import Chart from 'react-apexcharts';
 
 interface TimeseriesChartProps {
-  data: { x: string, y: number }[]; // Array de pontos de dados { x: string, y: number }
-  interval: string; // Intervalo de tempo selecionado
-  onClick: () => void; // Função a ser chamada ao clicar no gráfico
+  data: any[];
 }
 
-export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({ data, interval, onClick }) => {
-  const now = (val: number) => `${new Date().getHours()}:${new Date().getMinutes() - val}`;
+export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({ data }) => {
+  console.log(data)
+  const chartData = data.map((item: { timestamp: number; fields: { data_distance: number; } }) => ({
+    x: new Date(item.timestamp / 1000000), // Convertendo o timestamp para milissegundos
+    y: item.fields.data_distance,
+  }));
+
   const options = {
     chart: {
-      type: 'line',
+      type: 'line' as const, // Corrigindo o tipo
       zoom: {
         enabled: false,
       },
@@ -21,24 +24,7 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({ data, interval
       enabled: false,
     },
     xaxis: {
-      categories: [
-        now(0), 
-        now(1), 
-        now(2), 
-        now(3), 
-        now(4), 
-        now(5), 
-        now(6), 
-        now(7),
-        now(8),
-        now(9),
-        now(10),
-        now(11),
-        now(12),
-        now(13),
-        now(14),
-        now(15),
-      ],
+      type: 'datetime', // Mudando para datetime
       title: {
         text: 'Tempo',
         style: {
@@ -48,10 +34,8 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({ data, interval
       labels: {
         style: {
           colors: 'white',
-        
         }
       }
-      
     },
     yaxis: {
       title: {
@@ -66,7 +50,6 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({ data, interval
         }
       }
     },
-
     tooltip: {
       enabled: false,
     },
@@ -77,8 +60,7 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({ data, interval
 
   return (
     <div style={{ width: '30%', height: '50%', padding: '0', margin: '0', display: 'flex', justifyContent: 'center', alignItems: 'center', paddingRight: '32px' }}>
-      <Chart options={options} series={[{ name: 'Reservatório', data: [10, 41, 35, 51, 49, 62, 69, 25, 80, 15, 66, 55, 21, 44, 45] }]} type="line" width="100%" height="100%" />
+      <Chart options={options} series={[{ name: 'Reservatório', data: chartData }]} type="line" width="100%" height="100%" />
     </div>
   );
 };
-

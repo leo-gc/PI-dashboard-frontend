@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { BarChart } from "../BarChart";
 import { DonutChart } from "../DonutChart";
 import { TimeseriesChart } from "../TimeseriesChart"
@@ -10,8 +10,8 @@ type TankGraphsProps = {
 }
 
 export function TankGraphs({ tankNumber }: TankGraphsProps) {
-  const { lastLevels } = useContext(WatertankContext)
-
+  const { lastLevels, getLevelFromWatertankByNodeName } = useContext(WatertankContext)
+  const [tankNodeName, setTankNodeName] = React.useState<any>()
   const lastLevel = lastLevels?.filter(level => level.i === tankNumber)[0]
 
   const now = new Date();
@@ -21,8 +21,22 @@ export function TankGraphs({ tankNumber }: TankGraphsProps) {
     y: Math.random() * 100
   }));
 
+  const fetchTankbyNodeName = async () => {
+    try {
+      console.log('fetch')
+      const resp = await getLevelFromWatertankByNodeName(tankNumber.toString())
+      setTankNodeName(resp)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchTankbyNodeName()
+  }, [])
+
   return <Container>
-    <TimeseriesChart data={newData} interval="15min" onClick={() => null} />
+    <TimeseriesChart data={tankNodeName} />
     <BarChart />
     <DonutChart 
       percentage={lastLevel ? lastLevel.data_percentage : 0} 
