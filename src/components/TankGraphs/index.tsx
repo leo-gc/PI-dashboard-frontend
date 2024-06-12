@@ -33,11 +33,12 @@ export function TankGraphs({ tankNumber }: TankGraphsProps) {
   }
 
   useEffect(() => {
+    fetchTankbyNodeName()
   }, [])
 
   return <Container>
-    <h1 style={{ cursor: 'pointer' }} onClick={fetchTankbyNodeName} >cuzinho</h1>
-    {/* <TimeseriesChart data={tankNodeName} /> */}
+    {/* <h1 style={{ cursor: 'pointer' }} onClick={fetchTankbyNodeName} >cuzinho</h1> */}
+    <TimeseriesChart data={tankNodeName} />
     <BarChart />
     <DonutChart 
       percentage={lastLevel ? lastLevel.data_percentage : 0} 
